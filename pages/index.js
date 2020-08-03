@@ -13,6 +13,7 @@ import Head from 'next/head';
 
 
 
+
 export default function IndexPage() {
 	const [ projects, setProjects ] = useState([]);
 	const [ experiences, setExperiences ] = useState([]);
