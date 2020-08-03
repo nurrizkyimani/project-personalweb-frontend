@@ -6,7 +6,7 @@ import useMediaLink from '../hooks/useMediaLink';
 import useNavbarLink from '../hooks/navbar-hooks';
 import useMenuLink from '../hooks/menu-hooks';
 import Playlist from '../components/playlist';
-import CloseButton from '../components/closeButton.js';
+import CloseButton from '../components/closeButton';
 import Head from 'next/head';
 
 
