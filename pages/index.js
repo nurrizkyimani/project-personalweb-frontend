@@ -275,7 +275,7 @@ export default function IndexPage() {
 										<div>
 											<img
 												className="w-full h-48 object-cover border-b"
-												src={`${process.env.API_URL}${project.photo[0].url}`}
+												src={`${project.photo[0].url}`}
 												alt="Sunset in the mountains"
 											/>
 											<dir className="px-5 py-2 ">
