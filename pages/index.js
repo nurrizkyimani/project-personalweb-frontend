@@ -7,8 +7,7 @@ import useMenuLink from '../hooks/menu-hooks';
 import Playlist from '../components/playlist';
 import CloseButton from '../components/closebutton';
 import Head from 'next/head';
-
-
+import LoadingSpinner from '../components/loadingspinner';
 
 export default function IndexPage() {
 	const [ projects, setProjects ] = useState([]);
@@ -18,12 +17,13 @@ export default function IndexPage() {
 	const [ stackInfo, setStackInfo ] = useState({});
 	const [ aboutInfo, setAboutInfo ] = useState({});
 	const [ heroInfo, setHeroInfo ] = useState({});
+	const [ isLoading, setIsLoading ] = useState(true);
+
 	const mediaLink = useMediaLink();
 	const navbarLink = useNavbarLink();
 	const menuLink = useMenuLink();
 
 	useEffect(() => {
-
 		const fetching = async () => {
 			try {
 				const res = await axios.get(`${process.env.API_URL}/projects`);
@@ -36,15 +36,14 @@ export default function IndexPage() {
 
 		const fetchingexp = async () => {
 			try {
-				const res = await axios.get(`${process.env.API_URL}/experiences`);
+				const res = await axios.get(`${process.env.API_URL}/experiences?_sort=id:DESC`);
 				setExperiences(res.data);
 				console.log('setproject done');
 			} catch (error) {
 				console.log(error);
 			}
 		};
-		fetching();
-		fetchingexp();
+		
 
 		const fetchingstack = async () => {
 			try {
@@ -55,8 +54,7 @@ export default function IndexPage() {
 				console.log(error);
 			}
 		};
-
-		fetchingstack();
+		
 
 		const fetchinginfo = async () => {
 			try {
@@ -67,8 +65,7 @@ export default function IndexPage() {
 				console.log(error);
 			}
 		};
-
-		fetchinginfo();
+		
 
 		const fechingAbout = async () => {
 			try {
@@ -80,7 +77,7 @@ export default function IndexPage() {
 			}
 		};
 
-		fechingAbout();
+		
 
 		const fetchingHero = async () => {
 			try {
@@ -91,14 +88,37 @@ export default function IndexPage() {
 				console.log(error);
 			}
 		};
+		const fetchall = async() => {
+			setIsLoading(true)
+			await fetching();
+			await fetchingexp();
+			await fetchingstack();
+			await fetchinginfo();
+			await fechingAbout();
+			await fetchingHero();
+			setIsLoading(false)
+		}
 
-		fetchingHero();
+		fetchall()
+		
+
+		
 	}, []);
 
 	const toggleTrueFalse = () => setToggled(!isToggled);
 
-	let indigo
-
+	let content = (
+		<div className="bg-gray-100 fixed z-30 w-full h-full">
+			<LoadingSpinner
+				style={{
+					position: 'absolute',
+					top: '50%',
+					left: '50%',
+					transform: 'translate(-50%, -50%) ',
+				}}
+			/>
+		</div>
+	);
 
 	return (
 		<div>
@@ -110,6 +130,9 @@ export default function IndexPage() {
 				<title>Nurrizky Imani</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
+
+			{isLoading && content}
+
 			<div className="flex flex-col h-screen relative bg-gray-100">
 				<Nav addClass="bg-blue-100" toggleTFProp={() => toggleTrueFalse()} />
 
@@ -136,7 +159,13 @@ export default function IndexPage() {
 							{menuLink.map((menu) => (
 								<div className="icon-work flex py-2  hover:shadow-inner transition duration-300 ease-in-out hover:bg-gray-300 rounded-md p-2  ">
 									<p className="md:text-xl mr-1">{menu.icon}</p>
-									<a href={menu.link} className="ml-3 ">
+									<a
+										href={menu.link}
+										className="ml-3 "
+										onClick={() => {
+												toggleTrueFalse();
+											}}
+									>
 										{' '}
 										{menu.info}
 									</a>
@@ -179,13 +208,15 @@ export default function IndexPage() {
 								<p className="text-lg mb-2">{heroInfo.p1}</p>
 
 								<p className="text-lg mb-5 md:mb-12">{heroInfo.p2}</p>
-								<p class="font-semibold text-lg bg-blue-500 hover:bg-blue-400 transition duration-300 ease-in-out  text-white py-3 px-10 rounded-full hover:shadow-inner transform">
+								<a
+									class="font-semibold text-lg bg-blue-500 hover:bg-blue-400 transition duration-300 ease-in-out  text-white py-3 px-10 rounded-full hover:shadow-inner transform"
+									href="#experience"
+								>
+
 									Lets Go
-								</p>
+								</a>
 							</div>
 						</div>
-					
-					
 
 						<div id="experience">
 							<h1 className=" border-b  border-blue-600 mb-5 md:mb-0 text-4xl sticky px-5 md:px-0">
@@ -202,9 +233,11 @@ export default function IndexPage() {
 													<div className="flex mb-1 align-top content-start">
 														<div className="flex">
 															<img
-																className="w-12 h-12 object-none -ml-4 z-10"
-																src="https://picsum.photos/200/300?random=1"
-																alt="Sunset in the mountains"
+																className="w-12 h-12 object-cover -ml-4 z-10"
+																src={
+																	exp.company_logo != null ? exp.company_logo.url : ''
+																}
+																alt="Company Logo"
 															/>
 															<div className="flex flex-col">
 																<div className="ml-4 font-medium">{exp.title}</div>
@@ -275,7 +308,7 @@ export default function IndexPage() {
 										<div>
 											<img
 												className="w-full h-48 object-cover border-b"
-												src={`${project.photo[0].url}`}
+												src={`${project.photo.length != 0 ? project.photo[0].url : ''}`}
 												alt="Sunset in the mountains"
 											/>
 											<dir className="px-5 py-2 ">
@@ -309,9 +342,7 @@ export default function IndexPage() {
 							</div>
 						</div>
 
-
-
-						<div id="target">
+						<div id="stack">
 							<h1 className=" border-b  border-blue-600 mb-5 text-4xl sticky px-5 md:px-0 ">Stack 🛠</h1>
 							<div className="px-5 md:px-0">
 								<p key={stackInfo.id} className="md:pb-5">
@@ -341,11 +372,8 @@ export default function IndexPage() {
 								</div>
 							</div>
 						</div>
-						
 
-
-				
-						<div className="min-h-full" id="section1">
+						<div className="min-h-full" id="about">
 							<h1 className=" border-b  border-blue-600 mb-5 text-4xl sticky font-bold  px-5 md:px-0">
 								About 👨‍🚀
 							</h1>
