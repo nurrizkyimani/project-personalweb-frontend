@@ -81,7 +81,9 @@ export default function Nav(props) {
 				</li>
 				<ul className="md:flex justify-between items-center space-x-2 mr-3 hidden">
 					{links.map((link) => (
-						<li>
+						<li
+							key={link.label}
+							>
 							<a
 								href={`${link.weblink}`}
 								className="inline-block text-sm py-2 pr-2 hover:shadow-inner transform pl-1 leading-snug rounded-md text-gray-900  transition duration-300 ease-in-out  hover:bg-gray-300 mt-4 md:mt-0"

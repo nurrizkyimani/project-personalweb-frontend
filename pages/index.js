@@ -28,7 +28,7 @@ export default function IndexPage() {
 			try {
 				const res = await axios.get(`${process.env.API_URL}/projects`);
 				setProjects(res.data);
-				console.log('setproject done');
+				// console.log('setproject done');
 			} catch (error) {
 				console.log(error);
 			}
@@ -38,7 +38,7 @@ export default function IndexPage() {
 			try {
 				const res = await axios.get(`${process.env.API_URL}/experiences?_sort=id:DESC`);
 				setExperiences(res.data);
-				console.log('setproject done');
+				// console.log('setproject done');
 			} catch (error) {
 				console.log(error);
 			}
@@ -49,7 +49,7 @@ export default function IndexPage() {
 			try {
 				const res = await axios.get(`${process.env.API_URL}/stacks?_sort=id:ASC`);
 				setStacks(res.data);
-				console.log('setstack done');
+				// console.log('setstack done');
 			} catch (error) {
 				console.log(error);
 			}
@@ -60,7 +60,7 @@ export default function IndexPage() {
 			try {
 				const res = await axios.get(`${process.env.API_URL}/info-stack`);
 				setStackInfo(res.data);
-				console.log('setinfo done');
+				// console.log('setinfo done');
 			} catch (error) {
 				console.log(error);
 			}
@@ -71,7 +71,7 @@ export default function IndexPage() {
 			try {
 				const res = await axios.get(`${process.env.API_URL}/about`);
 				setAboutInfo(res.data);
-				console.log('setAbout done');
+				// console.log('setAbout done');
 			} catch (error) {
 				console.log(error);
 			}
@@ -83,7 +83,7 @@ export default function IndexPage() {
 			try {
 				const res = await axios.get(`${process.env.API_URL}/hero`);
 				setHeroInfo(res.data);
-				console.log('set hero done');
+				// console.log('set hero done');
 			} catch (error) {
 				console.log(error);
 			}
@@ -158,6 +158,7 @@ export default function IndexPage() {
 
 							{menuLink.map((menu) => (
 								<a
+									key={menu.info}
 									href={menu.link}
 									onClick={() => {
 												toggleTrueFalse();
@@ -175,7 +176,9 @@ export default function IndexPage() {
 
 							<ul className="flex justify-between items-center mr-3 md:hidden">
 								{navbarLink.map((link) => (
-									<li>
+									<li
+										key={link.id}
+									>
 										<a
 											href=""
 											className="inline-block text-sm px-2 py-2 hover:shadow-inner transform pl-1 leading-snug rounded-md text-gray-900  
@@ -210,7 +213,7 @@ export default function IndexPage() {
 
 								<p className="text-lg mb-5 md:mb-12">{heroInfo.p2}</p>
 								<a
-									class="font-semibold text-lg bg-blue-500 hover:bg-blue-400 transition duration-300 ease-in-out  text-white py-3 px-10 rounded-full hover:shadow-inner transform"
+									className="font-semibold text-lg bg-blue-500 hover:bg-blue-400 transition duration-300 ease-in-out  text-white py-3 px-10 rounded-full hover:shadow-inner transform"
 									href="#experience"
 								>
 
@@ -261,13 +264,13 @@ export default function IndexPage() {
 															})}
 														</ul>
 
-														<div class="align-start pt-4">
+														<div className="align-start pt-4">
 															{exp.tech_stack.map((stack) => {
 																if (stack.each_stack != null) {
 																	return (
 																		<span
 																			key={stack.id}
-																			class="inline-block bg-gray-200 rounded-full px-3 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2"
+																			className="inline-block bg-gray-200 rounded-full px-3 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2"
 																		>
 																			{stack.each_stack}
 																		</span>
@@ -324,13 +327,13 @@ export default function IndexPage() {
 											</dir>
 										</div>
 
-										<div class="align-start pt-4 items-end px-5 pb-5">
+										<div className="align-start pt-4 items-end px-5 pb-5">
 											{project.tags_project.map((tag) => {
 												if (tag.each_tag != null) {
 													return (
 														<span
 															key={tag.id}
-															class="inline-block bg-gray-200 rounded-full px-3 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2"
+															className="inline-block bg-gray-200 rounded-full px-3 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2"
 														>
 															{tag.each_tag}
 														</span>
@@ -413,11 +416,13 @@ export default function IndexPage() {
 											<h3 className="page-h3">Stay up-to-date</h3>
 											<p className=" text-sm mt-2">
 												<strong>Hint:</strong>{' '}
-												<span class=" opacity-50">Active on Instagram and Twitter.</span>
+												<span className=" opacity-50">Active on Instagram and Twitter.</span>
 											</p>
 											<ul className="social-link space-y-2 mt-6 ">
 												{mediaLink.map((each) => (
-													<li className="social-link  ">
+													<li
+														key={each.label}
+														className="social-link  ">
 														<a
 															className="flex text-sm py-2 pr-2 hover:shadow-inner transition duration-300 ease-in-out hover:bg-gray-300 rounded-md p-2 -ml-2"
 															href={each.link}
