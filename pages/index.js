@@ -157,19 +157,20 @@ export default function IndexPage() {
 							</p>
 
 							{menuLink.map((menu) => (
-								<div className="icon-work flex py-2  hover:shadow-inner transition duration-300 ease-in-out hover:bg-gray-300 rounded-md p-2  ">
-									<p className="md:text-xl mr-1">{menu.icon}</p>
-									<a
-										href={menu.link}
-										className="ml-3 "
-										onClick={() => {
+								<a
+									href={menu.link}
+									onClick={() => {
 												toggleTrueFalse();
 											}}
+									className="icon-work flex py-2  hover:shadow-inner transition duration-300 ease-in-out hover:bg-gray-300 rounded-md p-2  ">
+									<p className="md:text-xl mr-1">{menu.icon}</p>
+									<div
+										className="ml-3 "
 									>
 										{' '}
 										{menu.info}
-									</a>
-								</div>
+									</div>
+								</a>
 							))}
 
 							<ul className="flex justify-between items-center mr-3 md:hidden">
