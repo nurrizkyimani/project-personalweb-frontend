@@ -58,7 +58,7 @@ const socialMediaLink = () => {
           </svg>
         ),
         label: "Instagram",
-        link: `https://www.instagram.com/bocahsoto/`,
+        link: `https://www.instagram.com/nimanizky/`,
       },
 
       {
@@ -99,7 +99,7 @@ const socialMediaLink = () => {
           </svg>
         ),
         label: "Twitter",
-        link: `https://twitter.com/bocahsoto`,
+        link: `https://twitter.com/nimanizky`,
       },
 
       {
