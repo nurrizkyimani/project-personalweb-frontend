@@ -48,7 +48,7 @@ export default function IndexPage() {
 
     const fetchingstack = async () => {
       try {
-        const res = await axios.get(`${process.env.API_URL}/stacks?populate=*`);
+        const res = await axios.get(`${process.env.API_URL}stacks?populate=*`);
         setStacks(res.data.data);
       } catch (error) {
         console.log(error);
@@ -57,7 +57,7 @@ export default function IndexPage() {
 
     const fetchinginfo = async () => {
       try {
-        const res = await axios.get(`${process.env.API_URL}/info-stack`);
+        const res = await axios.get(`${process.env.API_URL}info-stack`);
         setStackInfo(res.data.data);
       } catch (error) {
         console.log(error);
@@ -66,7 +66,7 @@ export default function IndexPage() {
 
     const fechingAbout = async () => {
       try {
-        const res = await axios.get(`${process.env.API_URL}/about?populate=*`);
+        const res = await axios.get(`${process.env.API_URL}about?populate=*`);
         setAboutInfo(res.data.data);
       } catch (error) {
         console.log(error);
@@ -75,7 +75,7 @@ export default function IndexPage() {
 
     const fetchingHero = async () => {
       try {
-        const res = await axios.get(`${process.env.API_URL}/hero`);
+        const res = await axios.get(`${process.env.API_URL}hero`);
         setHeroInfo(res.data.data);
       } catch (error) {
         console.log(error);
