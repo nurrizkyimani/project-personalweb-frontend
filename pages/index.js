@@ -27,7 +27,7 @@ export default function IndexPage() {
     const fetching = async () => {
       try {
         const res = await axios.get(
-          `${process.env.API_URL}/projects?populate=*`
+          `${process.env.API_URL}projects?populate=*`
         );
         setProjects(res.data.data);
       } catch (error) {
@@ -38,7 +38,7 @@ export default function IndexPage() {
     const fetchingexp = async () => {
       try {
         const res = await axios.get(
-          `${process.env.API_URL}/experiences?populate=*`
+          `${process.env.API_URL}experiences?populate=*`
         );
         setExperiences(res.data.data);
       } catch (error) {
