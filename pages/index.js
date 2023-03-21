@@ -232,8 +232,8 @@ export default function IndexPage() {
                                 <img
                                   className="w-12 h-12 object-cover -ml-4 z-10"
                                   src={
-                                    exp.attributes.company_logo != null
-                                      ? exp.attributes.company_logo.url
+                                    exp.attributes.emg_company_logo_url != null
+                                      ? exp.attributes.emg_company_logo_url
                                       : ""
                                   }
                                 />
@@ -319,11 +319,10 @@ export default function IndexPage() {
                       <img
                         className="w-full h-48 object-cover border-b"
                         src={`${
-                          project.attributes.photo.data
-                            ? project.attributes.photo.data[0].url
+                          project.attributes.emg_photo_url
+                            ? project.attributes.emg_photo_url
                             : ""
                         }`}
-                        alt="Sunset in the mountains"
                       />
                       <dir className="px-5 py-2 ">
                         <div className="flex flex-col justify-between w-full min-h-full">
