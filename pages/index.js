@@ -27,7 +27,7 @@ export default function IndexPage() {
     const fetching = async () => {
       try {
         const res = await axios.get(
-          `${process.env.API_URL}projects?populate=*`
+          `${process.env.API_URL}projects?populate=*&sort=createdAt%3Adesc`
         );
         setProjects(res.data.data);
       } catch (error) {
